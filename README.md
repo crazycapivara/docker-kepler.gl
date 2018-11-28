@@ -19,6 +19,9 @@ docker run  --name kepler.gl -p 8080:8080 \
 	-e MapboxAccessToken="yourMapboxAccessToken" -d crazycapivara/kepler.gl
 ```
 
+Some modules need to be build at startup. Therefore, it will a take a minute until the container is ready to use
+at [http://localhost:8080](http://localhost:8080).
+
 ## Build
 
 ```bash
