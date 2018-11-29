@@ -15,7 +15,10 @@ RUN npm install \
 
 EXPOSE 8080
 
-RUN  sed -i s/\"start-local\".*/'"start-local": "webpack-dev-server --progress --hot --port 8080 --host 0.0.0.0",'/g examples/demo-app/package.json
+RUN  sed -i s/\"start-local\".*/'"start-local": "webpack-dev-server --progress --port 8080 --host 0.0.0.0",'/g examples/demo-app/package.json
+
+ADD demo-app/css/superfine.css /kepler.gl/examples/demo-app/css/superfine.css
+ADD demo-app/index.html /kepler.gl/examples/demo-app/index.html
 
 CMD ["npm", "start"]
 
