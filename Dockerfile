@@ -13,12 +13,14 @@ WORKDIR /kepler.gl
 RUN npm install \
 	&& npm audit fix
 
-EXPOSE 8080
+WORKDIR /kepler.gl/examples/demo-app
 
-RUN  sed -i s/\"start-local\".*/'"start-local": "webpack-dev-server --progress --port 8080 --host 0.0.0.0",'/g examples/demo-app/package.json
+RUN npm install \
+        && npm audit fix
 
-ADD demo-app/css/superfine.css /kepler.gl/examples/demo-app/css/superfine.css
-ADD demo-app/index.html /kepler.gl/examples/demo-app/index.html
+ENV PATH "$PATH:/kepler.gl/examples/demo-app/node_modules/.bin"
 
-CMD ["npm", "start"]
+EXPOSE 80
+
+CMD ["webpack-dev-server", "--progress", "--port", "80", "--host", "0.0.0.0"]
 
