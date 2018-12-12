@@ -1,6 +1,6 @@
 # kepler.gl in a box
 
-* [http://kepler.gl/#/](http://kepler.gl)
+* [http://kepler.gl](http://kepler.gl)
 * [https://github.com/uber/kepler.gl](https://github.com/uber/kepler.gl)
 
 ## Pull
