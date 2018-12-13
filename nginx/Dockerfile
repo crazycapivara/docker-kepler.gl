@@ -1,10 +1,10 @@
-FROM node:8.13.0-alpine
+FROM nginx:1.15.7-alpine 
 
 LABEL maintainer="Stefan Kuethe <crazycapivara@gmail.com>"
 
 RUN apk update \
 	&& apk upgrade \
-	&& apk add git
+	&& apk add git nodejs nodejs-npm
 
 RUN git clone https://github.com/uber/kepler.gl.git
 
@@ -16,11 +16,15 @@ RUN npm install \
 WORKDIR /kepler.gl/examples/demo-app
 
 RUN npm install \
-        && npm audit fix
+	&& npm audit fix
 
-ENV PATH "$PATH:/kepler.gl/examples/demo-app/node_modules/.bin"
+ADD ./docker-entrypoint.sh /kepler.gl/examples/demo-app/docker-entrypoint.sh
+
+RUN chmod +x docker-entrypoint.sh
 
 EXPOSE 80
 
-CMD ["webpack-dev-server", "--progress", "--port", "80", "--host", "0.0.0.0"]
+ENTRYPOINT ["./docker-entrypoint.sh"]
+
+CMD ["nginx", "-g", "daemon off;"]
 
