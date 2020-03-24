@@ -1,4 +1,4 @@
-FROM node:8.13.0-alpine
+FROM node:13.10.1-alpine3.11
 
 LABEL maintainer="Stefan Kuethe <crazycapivara@gmail.com>"
 
@@ -8,15 +8,9 @@ RUN apk update \
 
 RUN git clone https://github.com/uber/kepler.gl.git
 
-WORKDIR /kepler.gl
-
-RUN npm install \
-	&& npm audit fix
-
 WORKDIR /kepler.gl/examples/demo-app
 
-RUN npm install \
-        && npm audit fix
+RUN npm install
 
 ENV PATH "$PATH:/kepler.gl/examples/demo-app/node_modules/.bin"
 
