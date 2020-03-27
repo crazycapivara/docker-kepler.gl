@@ -1,4 +1,4 @@
-FROM nginx:1.15.7-alpine 
+FROM nginx:1.17.9-alpine 
 
 LABEL maintainer="Stefan Kuethe <crazycapivara@gmail.com>"
 
@@ -8,15 +8,9 @@ RUN apk update \
 
 RUN git clone https://github.com/uber/kepler.gl.git
 
-WORKDIR /kepler.gl
-
-RUN npm install \
-	&& npm audit fix
-
 WORKDIR /kepler.gl/examples/demo-app
 
-RUN npm install \
-	&& npm audit fix
+RUN npm install
 
 ADD ./docker-entrypoint.sh /kepler.gl/examples/demo-app/docker-entrypoint.sh
 
